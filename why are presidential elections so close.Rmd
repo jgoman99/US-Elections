@@ -1,6 +1,6 @@
 ---
 title: "Why are elections so close?"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +13,7 @@ Since 1988, no US President has won the popular vote by more than a ten percent 
 
 
   
-</br>
+
 
 ##### Recent History (1948-2020)
 
@@ -24,21 +24,21 @@ Since 1988, no US President has won the popular vote by more than a ten percent 
 
 ![](Images/pres_elect_1920.png)
 
-</br>
-</br>
+
+
 
 ### Wow. Thats a lot of landslides. What happened?
 
 Hmm, what if we remove incumbents?
-</br>
+
 
 
 ##### No Incumbents (1948-2020)
 
 ![](Images/pres_elect_1948_no_incumbents.png)
 
-</br>
-</br>
+
+
 
 ### Remove incumbents and landslides disappear
 

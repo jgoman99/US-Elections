@@ -100,6 +100,7 @@ compute_electoral_winner_states <- function(my_data)
 compute_votes_needed_to_win <- function(my_data)
 {
   my_data$votes_margin_total <- NA
+  my_data$votes_margin_total_percentage <- NA
   years <- unique(my_data$year)
   for (i in 1:length(years))
   {
@@ -108,7 +109,7 @@ compute_votes_needed_to_win <- function(my_data)
     second <- results$nominee[which(results$electoral_votes==nth(results$electoral_votes,2,descending = TRUE))]
     election_data <- my_data[which(my_data$year==year),]
     election_data <- election_data[which(!duplicated(election_data$state)),]
-    useful_data <- election_data[,c("state_winner","state","margin","electoral_votes_maximum")]
+    useful_data <- election_data[,c("state_winner","state","margin","electoral_votes_maximum","Popular.vote")]
     #sets second places margins to zero (zero cost to flip)
     useful_data[which(useful_data$state_winner==second),]$margin <- 0
     
@@ -129,6 +130,8 @@ compute_votes_needed_to_win <- function(my_data)
     # Final value (z)
     outcome = lp("min", f.obj, f.con, f.dir, f.rhs, int.vec = 1:4, all.bin = TRUE)
     my_data[which(my_data$year==year),]$votes_margin_total <- outcome$objval
+    total_votes = sum(my_data[which(my_data$year==year),]$Popular.vote)
+    my_data[which(my_data$year==year),]$votes_margin_total_percentage <- (outcome$objval/total_votes)
     
   }
   return(my_data)

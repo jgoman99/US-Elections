@@ -1,5 +1,6 @@
 library(lpSolve)
 
+
 uk_elections <- read.csv("../Data/uk_election_data.csv")
 uk_elections$votes[which(is.na(uk_elections$votes))]<-0
 

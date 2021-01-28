@@ -1,4 +1,5 @@
 library(Rfast)
+library(lpSolve)
 prez_data <- read.csv("../Data/presidential_elections_since_1920.csv")
 prez_data$Electoral.vote <- as.numeric(prez_data$Electoral.vote)
 prez_data$Popular.vote <- as.numeric(prez_data$Popular.vote)
@@ -144,3 +145,26 @@ prez_data <- compute_electoral_winner_states(prez_data)
 prez_data <- compute_votes_needed_to_win(prez_data)
 
 write.csv(prez_data,"../Data/presidential_elections_since_1920_plots.csv", row.names = FALSE)
+
+write_pivotal_vote_us <- function()
+{
+  my_data <- prez_data
+  years <- unique(my_data$year)
+  temp_data <- data.frame(matrix(,ncol=3,nrow=0,byrow = TRUE))
+  colnames(temp_data) <- c("party","year","pivotal_vote")
+  for (i in 1:length(years))
+  {
+    year <- years[i]
+    parties <- c("Democratic","Republican")
+    for (j in 1:length(parties))
+    {
+      party <- parties[j]
+      pivotal_vote <- unique(my_data$votes_margin_total[which(my_data$year==year & my_data$Party == party)])
+      new_row <- data.frame(party,year,pivotal_vote)
+      colnames(new_row) <- colnames(temp_data)
+      temp_data <- rbind(temp_data,new_row)
+      
+    }
+  }
+  write.csv(temp_data,"../Data/pivotal_vote_us.csv", row.names = FALSE)
+}

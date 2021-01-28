@@ -1,11 +1,9 @@
-# US-Elections
+File Structure:
 
+Data that needs cleaning/scraped from online --> Raw Data
+--> Input Data -- > Modified Data
 
-### Data:
-elections_historic_updated_2020 is based on the elections_historic dataset in the rpackage 'socviz'. It has 
-been modified to include the year 2020. Other additions may have also been made. Also this has been done for fun,
-so don't expect 100% accuracy.
+R for data cleaning/showing
+Python for integer programming etc
 
-* LBJ is marked as incumbent
-
-presidential_elections_since_1920 was scraped from wikipedia using rvest. (Thank you wikipedia)
+Note: first six column order matters for election data!
